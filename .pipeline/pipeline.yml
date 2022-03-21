@@ -1,0 +1,19 @@
+trigger:
+- master
+
+resources:
+  repositories:
+    - repository: template
+      type: git
+      name: Devops/pipeline-templates
+      ref: v2
+
+variables:
+  - name: MYSERVICE_NAME
+    value: 'no-cors'
+  - group: NO_CORS
+
+extends:
+  template: node/node.fargate.v2.yml@template
+  parameters:
+    SERVICENAME: ${{ variables.MYSERVICE_NAME }}
